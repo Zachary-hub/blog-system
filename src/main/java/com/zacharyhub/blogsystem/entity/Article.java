@@ -1,13 +1,8 @@
 package com.zacharyhub.blogsystem.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
 
-import java.time.LocalDateTime;
-
-@Getter
-@Setter
 @Entity
 public class Article {
 
@@ -20,9 +15,40 @@ public class Article {
     @Column(columnDefinition = "TEXT")
     private String content;
 
-    private LocalDateTime publishedAt;
-
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "blogger_id")
     private Blogger blogger;
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public Blogger getBlogger() {
+        return blogger;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public void setBlogger(Blogger blogger) {
+        this.blogger = blogger;
+    }
 }
